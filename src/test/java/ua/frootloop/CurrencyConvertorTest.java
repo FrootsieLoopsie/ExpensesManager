@@ -1,10 +1,26 @@
 package ua.frootloop;
 
+import org.junit.Before;
+import org.junit.Test;
+import ua.karatnyk.impl.CurrencyConversion;
+import ua.karatnyk.impl.ExpensesProgramAPI;
+
+import java.text.ParseException;
+import java.util.Map;
+
 public class CurrencyConvertorTest {
+
+    private ExpensesProgramAPI test;
+    private CurrencyConversion conversion;
+    @Before
+    public void init() {
+        test = new ExpensesProgramAPI();
+    }
 
     /**
      * ==================================================================================================
      *                                          BLACK BOX TESTING
+     *                               Testing the functionality of the method.
      * ==================================================================================================
      *
      * Selon nos spécifications, la méthode 'CurrencyConvertor.convert()' devrait;
@@ -30,5 +46,32 @@ public class CurrencyConvertorTest {
     final static double AMOUNT_MINIMUM = 0.0d, AMOUNT_MAXIMUM = 10000.0d;
     final static String[] CURRENCIES = new String[]{"USD", "CAD", "GBP", "EUR", "CHF", "INR", "AUD"};
 
+    @Test
+    public static void testConvert() {
+        Map<String, Double> rates =
+    }
+
+
+    /**
+     * ==================================================================================================
+     *                                          WHITE BOX TESTING
+     *                               Testing the implementation of the method.
+     * ==================================================================================================
+     *
+     * La fonction se base sur un objet de la classe "ua.karatnyk.impl.CurrencyConversion";
+     *      - Les paramètres "base", "date" et "rates" sont établis en fonction d'un fichier JSON.
+     *
+     * A. Critère de couverture des instructions
+     *          -
+     *
+     * B. Critère de couverture des arcs du graphe de flot de contrôle
+     *
+     * C. Critère de couverture des chemins indépendants du graphe de flot de contrôle
+     *
+     * D. Critère de couverture des conditions
+     *
+     * E. Critère de couverture des i-chemins
+     *
+     */
 
 }

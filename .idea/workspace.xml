@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="532ce320-5590-43a8-9597-24338f2e4c75" name="Changes" comment="Black box testing plan is in place.">
+    <list default="true" id="532ce320-5590-43a8-9597-24338f2e4c75" name="Changes" comment="- Updated to JUnit 5.9&#10;- Finished specifications for Black Box testing. Will move on to White Box revision and planning before writing any code">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ExpenseProject.iml" beforeDir="false" afterPath="$PROJECT_DIR$/ExpenseProject.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/ua/frootloop/CurrencyConvertorTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ua/frootloop/CurrencyConvertorTest.java" afterDir="false" />
     </list>
@@ -46,7 +48,8 @@
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.repository.indices&quot;
   }
 }</component>
   <component name="RunManager" selected="Application.Unnamed">
@@ -122,7 +125,21 @@
       <option name="project" value="LOCAL" />
       <updated>1671053321122</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="- Updated to JUnit 5.9&#10;- Finished specifications for Black Box testing. Will move on to White Box revision and planning before writing any code">
+      <created>1671056988379</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1671056988379</updated>
+    </task>
+    <task id="LOCAL-00007" summary="- Updated to JUnit 5.9&#10;- Finished specifications for Black Box testing. Will move on to White Box revision and planning before writing any code">
+      <created>1671057001857</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1671057001857</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -140,6 +157,7 @@
     <MESSAGE value="First commit! Build is done, JUnit is installed, Maven is set up. Let's goooo" />
     <MESSAGE value="First commit! Exams done, build is done, JUnit is installed, Maven is set up. Let's goooo" />
     <MESSAGE value="Black box testing plan is in place." />
-    <option name="LAST_COMMIT_MESSAGE" value="Black box testing plan is in place." />
+    <MESSAGE value="- Updated to JUnit 5.9&#10;- Finished specifications for Black Box testing. Will move on to White Box revision and planning before writing any code" />
+    <option name="LAST_COMMIT_MESSAGE" value="- Updated to JUnit 5.9&#10;- Finished specifications for Black Box testing. Will move on to White Box revision and planning before writing any code" />
   </component>
 </project>

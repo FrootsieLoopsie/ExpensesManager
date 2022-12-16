@@ -25,11 +25,6 @@
   			<artifactId>maven-compiler-plugin</artifactId>
   			<version>2.3.2</version>
   			<configuration>
-  				<archive>
-  					<manifest>
-  						<mainClass>ua.karatnyk.App</mainClass>
-  					</manifest>
-  				</archive>
   			</configuration>
   		</plugin>
   		<plugin>
@@ -46,24 +41,6 @@
                     <outputDirectory>.</outputDirectory>
                 </configuration>
            </plugin>
-           <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>copy-dependencies</id>
-                        <phase>prepare-package</phase>
-                        <goals>
-                            <goal>copy-dependencies</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>
-                                ${project.build.directory}
-                            </outputDirectory>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
@@ -93,25 +70,30 @@
  
 
   <dependencies>
-   
+
+      <!-- https://mvnrepository.com/artifact/org.json/json -->
+      <dependency>
+          <groupId>org.json</groupId>
+          <artifactId>json</artifactId>
+          <version>20220924</version>
+      </dependency>
   
-  <!-- https://mvnrepository.com/artifact/junit/junit -->
-  <dependency>
-    <groupId>junit</groupId>
-    <artifactId>junit</artifactId>
-    <version>4.12</version>
-    <scope>test</scope>
-</dependency>
-  
-  
-  <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
+    <!-- https://mvnrepository.com/artifact/junit/junit -->
+    <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>4.12</version>
+        <scope>test</scope>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
 	<dependency>
     	<groupId>com.google.code.gson</groupId>
     	<artifactId>gson</artifactId>
     	<version>2.2.4</version>
 	</dependency>
-  
-  <!-- https://mvnrepository.com/artifact/org.json/json -->
+
+      <!-- https://mvnrepository.com/artifact/org.json/json -->
       <dependency>
           <groupId>org.junit</groupId>
           <artifactId>junit-bom</artifactId>
