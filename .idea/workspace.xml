@@ -4,10 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="532ce320-5590-43a8-9597-24338f2e4c75" name="Changes" comment="- Updated to JUnit 5.9&#10;- Finished specifications for Black Box testing. Will move on to White Box revision and planning before writing any code">
+    <list default="true" id="532ce320-5590-43a8-9597-24338f2e4c75" name="Changes" comment="- Fixed up pom&#10;- Improved documentation of issues">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ExpenseProject.iml" beforeDir="false" afterPath="$PROJECT_DIR$/ExpenseProject.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/ua/frootloop/CurrencyConvertorTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ua/frootloop/CurrencyConvertorTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -139,7 +137,14 @@
       <option name="project" value="LOCAL" />
       <updated>1671057001857</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="- Fixed up pom&#10;- Improved documentation of issues">
+      <created>1671153937789</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1671153937789</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -158,6 +163,7 @@
     <MESSAGE value="First commit! Exams done, build is done, JUnit is installed, Maven is set up. Let's goooo" />
     <MESSAGE value="Black box testing plan is in place." />
     <MESSAGE value="- Updated to JUnit 5.9&#10;- Finished specifications for Black Box testing. Will move on to White Box revision and planning before writing any code" />
-    <option name="LAST_COMMIT_MESSAGE" value="- Updated to JUnit 5.9&#10;- Finished specifications for Black Box testing. Will move on to White Box revision and planning before writing any code" />
+    <MESSAGE value="- Fixed up pom&#10;- Improved documentation of issues" />
+    <option name="LAST_COMMIT_MESSAGE" value="- Fixed up pom&#10;- Improved documentation of issues" />
   </component>
 </project>

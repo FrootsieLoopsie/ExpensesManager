@@ -3,18 +3,23 @@ package ua.frootloop;
 import org.junit.Before;
 import org.junit.Test;
 import ua.karatnyk.impl.CurrencyConversion;
+import ua.karatnyk.impl.CurrencyConvertor;
 import ua.karatnyk.impl.ExpensesProgramAPI;
+import ua.karatnyk.impl.OfflineJsonWorker;
 
 import java.text.ParseException;
+import java.util.Arrays;
 import java.util.Map;
+import java.util.Random;
+
+import static org.junit.Assert.assertTrue;
 
 public class CurrencyConvertorTest {
-
-    private ExpensesProgramAPI test;
     private CurrencyConversion conversion;
+
     @Before
     public void init() {
-        test = new ExpensesProgramAPI();
+        conversion  = new OfflineJsonWorker().parser();
     }
 
     /**
@@ -43,13 +48,87 @@ public class CurrencyConvertorTest {
      *          - Montant = 0
      *          - Montant = 10000
      */
-    final static double AMOUNT_MINIMUM = 0.0d, AMOUNT_MAXIMUM = 10000.0d;
+    final static double AMOUNT_MINIMUM = 0.0d, AMOUNT_MAXIMUM = 10000.0d,
+                        AMOUNT_MID = (AMOUNT_MAXIMUM - AMOUNT_MINIMUM)/2.0d,
+                        AMOUNT_THIRD = (AMOUNT_MAXIMUM - AMOUNT_MINIMUM)/3.0d,
+                        AMOUNT_QUARTER = (AMOUNT_MAXIMUM - AMOUNT_MINIMUM)/4.0d;
     final static String[] CURRENCIES = new String[]{"USD", "CAD", "GBP", "EUR", "CHF", "INR", "AUD"};
 
-    @Test
-    public static void testConvert() {
-        Map<String, Double> rates =
+    private boolean doInputsThrowAnException(double amount, String currencyA, String currencyB) {
+        try {
+            CurrencyConvertor.convert(amount, currencyA, currencyB, this.conversion);
+        }
+        catch(ParseException e) {
+            return true;
+        }
+        return false;
     }
+
+    private boolean isValidCurrency( String currency) {
+        if(currency.length() != 3) return false;
+        for(String validCurrency : CURRENCIES)
+            if(currency.equals(validCurrency)) return true;
+        return false;
+    }
+
+
+    @Test
+    public void testConvertEquivalence_ValidInputs() {
+        // Testing the method to ensure that valid amounts, for any and all valid currencies,
+        // there should be NO thrown error, like, at all. This covers all possible cases for currencies.
+        for(String validCurrencyA : CURRENCIES) {
+            for (String validCurrencyB : CURRENCIES) {
+                assertTrue(!doInputsThrowAnException(AMOUNT_MID, validCurrencyA, validCurrencyB));
+                assertTrue(!doInputsThrowAnException(AMOUNT_THIRD, validCurrencyA, validCurrencyB));
+                assertTrue(!doInputsThrowAnException(AMOUNT_QUARTER, validCurrencyA, validCurrencyB));
+            }
+        }
+    }
+
+    @Test
+    public void testConvertEquivalence_HighAmounts() {
+        // For any valid currency, if the amount is too high, it should throw an error:
+        for(String validCurrencyA : CURRENCIES)
+            for(String validCurrencyB : CURRENCIES)
+                assertTrue(doInputsThrowAnException(AMOUNT_MAXIMUM + 1, validCurrencyA, validCurrencyB));
+    }
+
+    @Test
+    public void testConvertEquivalence_LowAmounts() {
+        // For any valid currency, if the amount is too low, it should throw an error:
+        for(String validCurrencyA : CURRENCIES)
+            for(String validCurrencyB : CURRENCIES)
+                assertTrue(doInputsThrowAnException(AMOUNT_MINIMUM - 1, validCurrencyA, validCurrencyB));
+    }
+
+    @Test
+    public void testConvertEquivalence_InvalidCurrencies() {
+
+        // If a currency is not in our specification, but is still an existing currency in the
+        // "rates" dictionary/hashmap, it should still be rejected:
+        for (String invalidCurrency : conversion.getRates().keySet()) {
+            for(String validCurrency : CURRENCIES) {
+                if(isValidCurrency(invalidCurrency)) break;
+                if (!doInputsThrowAnException(AMOUNT_MID, validCurrency, invalidCurrency))
+                    assertTrue(false);
+            }
+        }
+        assertTrue(true);
+    }
+
+    @Test
+    public void testConvertEquivalence_RandomStringsAsCurrency() {
+
+        // The method should reject these systematically, since they are not actual currency signifiers:
+        for(String validCurrency : CURRENCIES) {
+            assertTrue(doInputsThrowAnException(AMOUNT_MID, validCurrency, "a"));
+            assertTrue(doInputsThrowAnException(AMOUNT_MID, validCurrency, "aA"));
+            assertTrue(doInputsThrowAnException(AMOUNT_MID, validCurrency, "aAB"));
+            assertTrue(doInputsThrowAnException(AMOUNT_MID, validCurrency, "SAXaAB"));
+            assertTrue(doInputsThrowAnException(AMOUNT_MID, validCurrency, "xAVAABc"));
+        }
+    }
+
 
 
     /**
@@ -62,7 +141,7 @@ public class CurrencyConvertorTest {
      *      - Les paramètres "base", "date" et "rates" sont établis en fonction d'un fichier JSON.
      *
      * A. Critère de couverture des instructions
-     *          -
+     *      -
      *
      * B. Critère de couverture des arcs du graphe de flot de contrôle
      *
