@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="532ce320-5590-43a8-9597-24338f2e4c75" name="Changes" comment="- Équivalences done!">
+    <list default="true" id="532ce320-5590-43a8-9597-24338f2e4c75" name="Changes" comment="- Équivalences improved a bit. Added a way to print out a detailed log of what the inputs were that threw AssertionExceptions.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/ua/frootloop/CurrencyConvertorTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ua/frootloop/CurrencyConvertorTest.java" afterDir="false" />
     </list>
@@ -151,7 +151,14 @@
       <option name="project" value="LOCAL" />
       <updated>1671165568756</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="- Équivalences improved a bit. Added a way to print out a detailed log of what the inputs were that threw AssertionExceptions.">
+      <created>1671166686860</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1671166686860</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -172,6 +179,7 @@
     <MESSAGE value="- Updated to JUnit 5.9&#10;- Finished specifications for Black Box testing. Will move on to White Box revision and planning before writing any code" />
     <MESSAGE value="- Fixed up pom&#10;- Improved documentation of issues" />
     <MESSAGE value="- Équivalences done!" />
-    <option name="LAST_COMMIT_MESSAGE" value="- Équivalences done!" />
+    <MESSAGE value="- Équivalences improved a bit. Added a way to print out a detailed log of what the inputs were that threw AssertionExceptions." />
+    <option name="LAST_COMMIT_MESSAGE" value="- Équivalences improved a bit. Added a way to print out a detailed log of what the inputs were that threw AssertionExceptions." />
   </component>
 </project>

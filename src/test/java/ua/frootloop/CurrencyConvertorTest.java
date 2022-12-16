@@ -99,7 +99,7 @@ public class CurrencyConvertorTest {
         // For any valid currency, if the amount is too high, it should throw an error:
         for(String validCurrencyA : CURRENCIES)
             for(String validCurrencyB : CURRENCIES)
-                assertTrue(doInputsThrowAnException(AMOUNT_MAXIMUM + 1, validCurrencyA, validCurrencyB));
+                assertTrue(doInputsThrowAnException(AMOUNT_MAXIMUM + AMOUNT_MID, validCurrencyA, validCurrencyB));
     }
 
     @Test
@@ -107,7 +107,7 @@ public class CurrencyConvertorTest {
         // For any valid currency, if the amount is too low, it should throw an error:
         for(String validCurrencyA : CURRENCIES)
             for(String validCurrencyB : CURRENCIES)
-                assertTrue(doInputsThrowAnException(AMOUNT_MINIMUM - 1, validCurrencyA, validCurrencyB));
+                assertTrue(doInputsThrowAnException(AMOUNT_MINIMUM - AMOUNT_MID, validCurrencyA, validCurrencyB));
     }
 
     @Test
@@ -141,6 +141,59 @@ public class CurrencyConvertorTest {
             assertTrue(doInputsThrowAnException(AMOUNT_MID, validCurrency, "aAB"));
             assertTrue(doInputsThrowAnException(AMOUNT_MID, validCurrency, "SAXaAB"));
             assertTrue(doInputsThrowAnException(AMOUNT_MID, validCurrency, "xAVAABc"));
+        }
+    }
+
+    @Test
+    public void testConvertEdges_AmountsMax1() {
+        for(String validCurrencyA : CURRENCIES) {
+            for (String validCurrencyB : CURRENCIES) {
+                try {
+                    assertTrue(!doInputsThrowAnException(AMOUNT_MAXIMUM, validCurrencyA, validCurrencyB));
+                    assertTrue(!doInputsThrowAnException(AMOUNT_MAXIMUM - 1, validCurrencyA, validCurrencyB));
+                } catch (AssertionError e) {
+                    printAssertionErrorMessage(e, "Rejected, but the amount is just barely acceptable, and should have passed.", AMOUNT_MAXIMUM, validCurrencyA, validCurrencyB);
+                }
+            }
+        }
+    }
+    @Test
+    public void testConvertEdges_AmountsMax2() {
+        for(String validCurrencyA : CURRENCIES) {
+            for (String validCurrencyB : CURRENCIES) {
+                try {
+                    assertTrue(doInputsThrowAnException(AMOUNT_MAXIMUM + 1, validCurrencyA, validCurrencyB));
+                } catch (AssertionError e) {
+                    printAssertionErrorMessage(e, "Accepted, but the amount is just above the acceptable limit.", AMOUNT_MAXIMUM, validCurrencyA, validCurrencyB);
+                }
+            }
+        }
+    }
+
+    @Test
+    public void testConvertEdges_AmountsMin1() {
+        for(String validCurrencyA : CURRENCIES) {
+            for (String validCurrencyB : CURRENCIES) {
+                try {
+                    assertTrue(!doInputsThrowAnException(AMOUNT_MINIMUM, validCurrencyA, validCurrencyB));
+                    assertTrue(!doInputsThrowAnException(AMOUNT_MINIMUM + 1, validCurrencyA, validCurrencyB));
+                } catch (AssertionError e) {
+                    printAssertionErrorMessage(e, "Rejected, but the amount is just barely acceptable, and should have passed.", AMOUNT_MINIMUM, validCurrencyA, validCurrencyB);
+                }
+            }
+        }
+    }
+
+    @Test
+    public void testConvertEdges_AmountsMin2() {
+        for(String validCurrencyA : CURRENCIES) {
+            for (String validCurrencyB : CURRENCIES) {
+                try {
+                    assertTrue(doInputsThrowAnException(AMOUNT_MINIMUM - 1, validCurrencyA, validCurrencyB));
+                } catch (AssertionError e) {
+                    printAssertionErrorMessage(e, "Accepted, but the amount is just below the acceptable limit.", AMOUNT_MINIMUM, validCurrencyA, validCurrencyB);
+                }
+            }
         }
     }
 
