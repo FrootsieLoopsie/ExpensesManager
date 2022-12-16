@@ -64,11 +64,16 @@ public class CurrencyConvertorTest {
         return false;
     }
 
-    private boolean isValidCurrency( String currency) {
+    private boolean isValidCurrency(String currency) {
         if(currency.length() != 3) return false;
         for(String validCurrency : CURRENCIES)
             if(currency.equals(validCurrency)) return true;
         return false;
+    }
+
+    private static void printAssertionErrorMessage(AssertionError e, String description, double amount, String currencyA, String currencyB) {
+        System.out.println("[ ASSERTION ERROR ]\nTest for method 'ua.karatnyk.impl.CurrencyConvertor.convert()' failed:\n" + description + ".\n    Input values --> Amount: " + amount + ", CurrencyA: '" + currencyA + "', CurrencyB: '" + currencyB + "'");
+        throw e;
     }
 
 
@@ -78,9 +83,13 @@ public class CurrencyConvertorTest {
         // there should be NO thrown error, like, at all. This covers all possible cases for currencies.
         for(String validCurrencyA : CURRENCIES) {
             for (String validCurrencyB : CURRENCIES) {
-                assertTrue(!doInputsThrowAnException(AMOUNT_MID, validCurrencyA, validCurrencyB));
-                assertTrue(!doInputsThrowAnException(AMOUNT_THIRD, validCurrencyA, validCurrencyB));
-                assertTrue(!doInputsThrowAnException(AMOUNT_QUARTER, validCurrencyA, validCurrencyB));
+                try {
+                    assertTrue(!doInputsThrowAnException(AMOUNT_MID, validCurrencyA, validCurrencyB));
+                    assertTrue(!doInputsThrowAnException(AMOUNT_THIRD, validCurrencyA, validCurrencyB));
+                    assertTrue(!doInputsThrowAnException(AMOUNT_QUARTER, validCurrencyA, validCurrencyB));
+                } catch (AssertionError e) {
+                    printAssertionErrorMessage(e, "Rejected, but both the currencies and the amount were valid.", AMOUNT_MID, validCurrencyA, validCurrencyB);
+                }
             }
         }
     }
@@ -107,13 +116,19 @@ public class CurrencyConvertorTest {
         // If a currency is not in our specification, but is still an existing currency in the
         // "rates" dictionary/hashmap, it should still be rejected:
         for (String invalidCurrency : conversion.getRates().keySet()) {
+            if(isValidCurrency(invalidCurrency)) continue;
             for(String validCurrency : CURRENCIES) {
-                if(isValidCurrency(invalidCurrency)) break;
-                if (!doInputsThrowAnException(AMOUNT_MID, validCurrency, invalidCurrency))
-                    assertTrue(false);
+                try {
+                    assertTrue(doInputsThrowAnException(AMOUNT_MID, validCurrency, invalidCurrency));
+                } catch (AssertionError e) {
+                    System.out.println("[ ASSERTION ERROR ]\n" +
+                            "Test for method 'ua.karatnyk.impl.CurrencyConvertor.convert()' failed:\n" +
+                            "Accepted invalid currency '" + invalidCurrency + "', which was in the 'rates' map.\n" +
+                            "    Input values --> Amount: " + AMOUNT_MID + ", CurrencyA: '" + validCurrency + "', CurrencyB: '" + invalidCurrency);
+                    throw e;
+                }
             }
         }
-        assertTrue(true);
     }
 
     @Test
