@@ -72,7 +72,7 @@ public class CurrencyConvertorTest {
     }
 
     private static void printAssertionErrorMessage(AssertionError e, String description, double amount, String currencyA, String currencyB) {
-        System.out.println("[ ASSERTION ERROR ]\nTest for method 'ua.karatnyk.impl.CurrencyConvertor.convert()' failed:\n" + description + ".\n    Input values --> Amount: " + amount + ", CurrencyA: '" + currencyA + "', CurrencyB: '" + currencyB + "'");
+        System.out.println("[ ASSERTION ERROR ]\nTest for method 'ua.karatnyk.impl.CurrencyConvertor.convert()' failed:\n" + description + "\n    Input values --> Amount: " + amount + ", CurrencyA: '" + currencyA + "', CurrencyB: '" + currencyB + "'");
         throw e;
     }
 
@@ -96,23 +96,32 @@ public class CurrencyConvertorTest {
 
     @Test
     public void testConvertEquivalence_HighAmounts() {
-        // For any valid currency, if the amount is too high, it should throw an error:
-        for(String validCurrencyA : CURRENCIES)
-            for(String validCurrencyB : CURRENCIES)
-                assertTrue(doInputsThrowAnException(AMOUNT_MAXIMUM + AMOUNT_MID, validCurrencyA, validCurrencyB));
+        for(String validCurrencyA : CURRENCIES) {
+            for (String validCurrencyB : CURRENCIES) {
+                try {
+                    assertTrue(doInputsThrowAnException(AMOUNT_MAXIMUM + AMOUNT_MID, validCurrencyA, validCurrencyB));;
+                } catch (AssertionError e) {
+                    printAssertionErrorMessage(e, "Accepted, but the amount was too high, it should have been rejected.", AMOUNT_MAXIMUM + AMOUNT_MID, validCurrencyA, validCurrencyB);
+                }
+            }
+        }
     }
 
     @Test
     public void testConvertEquivalence_LowAmounts() {
-        // For any valid currency, if the amount is too low, it should throw an error:
-        for(String validCurrencyA : CURRENCIES)
-            for(String validCurrencyB : CURRENCIES)
-                assertTrue(doInputsThrowAnException(AMOUNT_MINIMUM - AMOUNT_MID, validCurrencyA, validCurrencyB));
+        for(String validCurrencyA : CURRENCIES) {
+            for (String validCurrencyB : CURRENCIES) {
+                try {
+                    assertTrue(doInputsThrowAnException(AMOUNT_MINIMUM - AMOUNT_MID, validCurrencyA, validCurrencyB));;
+                } catch (AssertionError e) {
+                    printAssertionErrorMessage(e, "Accepted, but the amount was too low, it should have been rejected.", AMOUNT_MINIMUM - AMOUNT_MID, validCurrencyA, validCurrencyB);
+                }
+            }
+        }
     }
 
     @Test
     public void testConvertEquivalence_InvalidCurrencies() {
-
         // If a currency is not in our specification, but is still an existing currency in the
         // "rates" dictionary/hashmap, it should still be rejected:
         for (String invalidCurrency : conversion.getRates().keySet()) {
@@ -121,11 +130,7 @@ public class CurrencyConvertorTest {
                 try {
                     assertTrue(doInputsThrowAnException(AMOUNT_MID, validCurrency, invalidCurrency));
                 } catch (AssertionError e) {
-                    System.out.println("[ ASSERTION ERROR ]\n" +
-                            "Test for method 'ua.karatnyk.impl.CurrencyConvertor.convert()' failed:\n" +
-                            "Accepted invalid currency '" + invalidCurrency + "', which was in the 'rates' map.\n" +
-                            "    Input values --> Amount: " + AMOUNT_MID + ", CurrencyA: '" + validCurrency + "', CurrencyB: '" + invalidCurrency);
-                    throw e;
+                    printAssertionErrorMessage(e,  "Accepted invalid currency '" + invalidCurrency + "', which was in the 'rates' map.", AMOUNT_MID, validCurrency, invalidCurrency);
                 }
             }
         }
@@ -136,11 +141,15 @@ public class CurrencyConvertorTest {
 
         // The method should reject these systematically, since they are not actual currency signifiers:
         for(String validCurrency : CURRENCIES) {
-            assertTrue(doInputsThrowAnException(AMOUNT_MID, validCurrency, "a"));
-            assertTrue(doInputsThrowAnException(AMOUNT_MID, validCurrency, "aA"));
-            assertTrue(doInputsThrowAnException(AMOUNT_MID, validCurrency, "aAB"));
-            assertTrue(doInputsThrowAnException(AMOUNT_MID, validCurrency, "SAXaAB"));
-            assertTrue(doInputsThrowAnException(AMOUNT_MID, validCurrency, "xAVAABc"));
+            try{
+                assertTrue(doInputsThrowAnException(AMOUNT_MID, validCurrency, "a"));
+                assertTrue(doInputsThrowAnException(AMOUNT_MID, validCurrency, "aA"));
+                assertTrue(doInputsThrowAnException(AMOUNT_MID, validCurrency, "aAB"));
+                assertTrue(doInputsThrowAnException(AMOUNT_MID, validCurrency, "SAXaAB"));
+                assertTrue(doInputsThrowAnException(AMOUNT_MID, validCurrency, "xAVAABc"));
+            } catch (AssertionError e) {
+                printAssertionErrorMessage(e, "Accepted, but the inputted string was just a random jumble instead of a currency signifier.", AMOUNT_MID, validCurrency, "a");
+            }
         }
     }
 
