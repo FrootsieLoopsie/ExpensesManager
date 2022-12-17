@@ -235,7 +235,7 @@ public class CurrencyConvertorTest {
     @Test
     public void testConvert_ThrownException() {
 
-        // Generate a totally random string that isn't in "rates":
+        // Generate a totally random string that assuredly isn't in "rates":
         String randomString;
         do randomString = "" + Math.random();
         while(this.conversion.getRates().containsKey(randomString));
@@ -278,10 +278,11 @@ public class CurrencyConvertorTest {
 
         for(String realCurrencyA : rateKeys) {
             for (String realCurrencyB : rateKeys) {
+                if(!isValidCurrency(realCurrencyA) || !isValidCurrency(realCurrencyB)) continue;
                 try {
                     assertTrue(!doInputsThrowAnException(AMOUNT_MID, realCurrencyA, realCurrencyB));
                 } catch (AssertionError e) {
-                    printAssertionErrorMessage(e, "Rejected, but both currencies inputted belong in the \"rates\" dictionary.", AMOUNT_MID, realCurrencyA, realCurrencyB);
+                    printAssertionErrorMessage(e, "Rejected, but both currencies inputted are valid and belong in the \"rates\" dictionary.", AMOUNT_MID, realCurrencyA, realCurrencyB);
                 }
             }
         }
