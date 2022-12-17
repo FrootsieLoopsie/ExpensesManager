@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="532ce320-5590-43a8-9597-24338f2e4c75" name="Changes" comment="- Frontières done! Edges cases are all caught, with the exception of edges cases relating to currency strings, because I'm struggle to figure out what that would look like. All caps vs no caps?">
+    <list default="true" id="532ce320-5590-43a8-9597-24338f2e4c75" name="Changes" comment="- Mise à jour pour aider au rapport.&#10;- Descriptions détaillées à chaque assert en échec + traceback imprimés au terminal.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/ua/frootloop/CurrencyConvertorTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ua/frootloop/CurrencyConvertorTest.java" afterDir="false" />
     </list>
@@ -165,7 +165,14 @@
       <option name="project" value="LOCAL" />
       <updated>1671167642775</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="- Mise à jour pour aider au rapport.&#10;- Descriptions détaillées à chaque assert en échec + traceback imprimés au terminal.">
+      <created>1671175724624</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1671175724624</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -188,6 +195,7 @@
     <MESSAGE value="- Équivalences done!" />
     <MESSAGE value="- Équivalences improved a bit. Added a way to print out a detailed log of what the inputs were that threw AssertionExceptions." />
     <MESSAGE value="- Frontières done! Edges cases are all caught, with the exception of edges cases relating to currency strings, because I'm struggle to figure out what that would look like. All caps vs no caps?" />
-    <option name="LAST_COMMIT_MESSAGE" value="- Frontières done! Edges cases are all caught, with the exception of edges cases relating to currency strings, because I'm struggle to figure out what that would look like. All caps vs no caps?" />
+    <MESSAGE value="- Mise à jour pour aider au rapport.&#10;- Descriptions détaillées à chaque assert en échec + traceback imprimés au terminal." />
+    <option name="LAST_COMMIT_MESSAGE" value="- Mise à jour pour aider au rapport.&#10;- Descriptions détaillées à chaque assert en échec + traceback imprimés au terminal." />
   </component>
 </project>
