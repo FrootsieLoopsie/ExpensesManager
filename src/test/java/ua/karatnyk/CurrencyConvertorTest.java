@@ -1,4 +1,4 @@
-package ua.frootloop;
+package ua.karatnyk;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -128,7 +128,7 @@ public class CurrencyConvertorTest {
     public void testConvertEquivalence_PlausibleCurrencies() {
 
         // Extracted from list of circulating currencies:
-        String[] invalidButPlausibleCurrencies = new String[]{"CAD","USD","EUR","JPY","CHF","HKD","KRW","RUB","ALL","GBP","ARS","EGP"};
+        String[] invalidButPlausibleCurrencies = new String[]{"JPY","CHF","HKD","KRW","RUB","ALL","ARS","EGP"};
 
         for (String invalidCurrency : invalidButPlausibleCurrencies) {
             if(isValidCurrency(invalidCurrency)) continue;
