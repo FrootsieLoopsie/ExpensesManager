@@ -178,7 +178,7 @@ public class CurrencyConvertorTest {
                 try {
                     assertTrue(doInputsThrowAnException(AMOUNT_MAXIMUM + 1, validCurrencyA, validCurrencyB));
                 } catch (AssertionError e) {
-                    printAssertionErrorMessage(e, "Accepted, but the amount is just above the acceptable maximum.", AMOUNT_MAXIMUM, validCurrencyA, validCurrencyB);
+                    printAssertionErrorMessage(e, "Accepted, but the amount is just above the acceptable maximum.", AMOUNT_MAXIMUM + 1, validCurrencyA, validCurrencyB);
                 }
             }
         }
@@ -205,8 +205,21 @@ public class CurrencyConvertorTest {
                 try {
                     assertTrue(doInputsThrowAnException(AMOUNT_MINIMUM - 1, validCurrencyA, validCurrencyB));
                 } catch (AssertionError e) {
-                    printAssertionErrorMessage(e, "Accepted, but the amount is just below the acceptable minimum.", AMOUNT_MINIMUM, validCurrencyA, validCurrencyB);
+                    printAssertionErrorMessage(e, "Accepted, but the amount is just below the acceptable minimum.", AMOUNT_MINIMUM - 1, validCurrencyA, validCurrencyB);
                 }
+            }
+        }
+    }
+
+    @Test
+    public void testConvertEdges_SameCurrencyNoConversion() {
+        for(String validCurrency : CURRENCIES) {
+            try {
+                assertTrue(AMOUNT_MID == CurrencyConvertor.convert(AMOUNT_MID, validCurrency, validCurrency, this.conversion));
+            } catch (AssertionError e1) {
+                printAssertionErrorMessage(e1, "Unexpected behavior given specifications; the currencies are the same, so no conversion should have taken place.", AMOUNT_MID, validCurrency, validCurrency);
+            } catch (Exception e2) {
+                printAssertionErrorMessage(new AssertionError(), "Rejected, but the amount and currencies are all valid.", AMOUNT_MID, validCurrency, validCurrency);
             }
         }
     }
@@ -275,7 +288,7 @@ public class CurrencyConvertorTest {
     }
 
     @Test
-    public void testConvert_ValueReturned_GivenSpecifications() {
+    public void testConvert_ValueReturned_GivenCurrencySpecifications() {
         // If a currency is not in our specification, but is still an existing currency in the
         // "rates" dictionary/hashmap, it should still be rejected:
         for (String invalidCurrency : conversion.getRates().keySet()) {
@@ -289,5 +302,4 @@ public class CurrencyConvertorTest {
             }
         }
     }
-
 }
